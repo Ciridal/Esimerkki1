@@ -1,0 +1,46 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
+
+int main()
+{
+	sf::RenderWindow window(sf::VideoMode(500, 500), "Illuminati confirmed!");
+	sf::CircleShape triangle(250,3);
+	triangle.setFillColor(sf::Color(100, 250, 50));
+
+	// set a 10-pixel wide orange outline
+	/*triangle.setOutlineThickness(10);
+	triangle.setOutlineColor(sf::Color(300, 150, 100));
+	*/
+	sf::Texture texture;
+	if (!texture.loadFromFile("C:\\Users\\SinjaMon\\Desktop\\peliohjelmointi\\svm\\project\\Projecti\\confirmed.png"))
+	{
+		//error?
+	}
+
+	triangle.setTexture(&texture);
+
+	sf::Music music;
+
+	if (music.openFromFile("C:\\Users\\SinjaMon\\Desktop\\peliohjelmointi\\svm\\project\\Projecti\\illuminatisound.ogg"))
+	{
+		music.play();
+	}
+		
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(triangle);
+		window.display();
+	}
+
+	return 0;
+}
